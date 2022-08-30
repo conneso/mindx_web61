@@ -1,16 +1,17 @@
 import express from 'express';
 import { MongoClient } from 'mongodb';
+import * as config from './config.json'
 
-const mongoUri = 'mongodb://localhost:27017';
+const mongoUri = config.db_conn//'mongodb://localhost:27017';
 const client = new MongoClient(mongoUri);
 const dbName = 'web61';
 
 const connectDB = async () => {
   await client.connect();
   const db = client.db(dbName);
-  const teacherCollection = db.collection('teachers');
-  const teachers = await teacherCollection.find().toArray();
-  console.log(teachers);
+  const restCollection = db.collection('restaurants');
+  const restaurants = await restCollection.find().toArray();
+  console.log(restaurants);
 };
 
 connectDB();
