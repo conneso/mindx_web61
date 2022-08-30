@@ -1,6 +1,5 @@
 import express from 'express';
 import authRouter from './auth';
-import { isAuthenticated } from './authMdw';
 import filmRouter from './film';
 
 const port = 3001;
