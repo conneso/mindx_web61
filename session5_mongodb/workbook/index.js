@@ -2,21 +2,16 @@ import express from "express";
 import { MongoClient } from "mongodb";
 //import * as config from "./config.json";
 
-const mongoUri = 'mongodb://localhost:27017';
+const mongoUri = 'mongodb+srv://mXWeb61:lpilWrmQb192qNqY@cluster0.awgnvid.mongodb.net';
 const client = new MongoClient(mongoUri);
-const dbName = "web61";
+const dbName = "mindx-web58";
 
 const connectDB = async () => {
-  console.log("Dòng này để đặt breakpoint");
   await client.connect();
   const db = client.db(dbName);
   const restCollection = db.collection("restaurants");
-  const restaurants = await restCollection.find().toArray();
-  console.log(restaurants); //code loằng ngoằng
-
-  console.log("code lởm");
-
-  //đây là dòng code không đúng format
+  const restaurants = await restCollection.find().skip(1).limit(2).toArray();
+  console.log('Danh sach nha hang',restaurants);
 };
 
 connectDB();
