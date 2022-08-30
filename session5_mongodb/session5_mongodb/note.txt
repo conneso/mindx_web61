@@ -1,0 +1,18 @@
+show dbs - List all databases
+use <db_name> - Create/switch to database
+db.getCollectionNames() - Get all collection names
+db.<collection_name>.find(<query>) - Query documents
+db.teachers.insertOne(<data>) - Create a document
+db.teachers.updateOne(<query>, <action>) - Update a document
+db.teachers.updateMany(<query>, <action>) - Update many documents
+db.teachers.deleteOne(<query>) - Delete a document
+db.teachers.deleteMany(<query>) - Delete many documents
+
+
+$exists
+$lt - less than
+$gt - greater than
+$lte - less than or equal
+$gte - greater than or equal
+$in
+More at: https://www.mongodb.com/docs/manual/reference/operator/query/
