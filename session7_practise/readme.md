@@ -5,3 +5,6 @@
         Research: find(), findById(), findOne()
         Create/Update: updateOne(), updateMany(), find...Update()
         Delete: deleteOne(), deleteMany(), find...AndDelete()
+
+
+Bài tập về nhà: Tạo schema, model cho restaurants. CRUD restaurants
