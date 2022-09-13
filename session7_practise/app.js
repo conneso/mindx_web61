@@ -17,6 +17,13 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/api/users", usersRouter);
 
+const database = require('./DAL/database')
+const db = new database()
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
+  db.connect().then((err, result)=>{
+    if(err) throw err
+    console.log('database is connected')
+  })
 });
