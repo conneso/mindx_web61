@@ -24,7 +24,7 @@ router.get("/findByTitle", (req, res) => {
       throw err;
     });
 });
-router.put("", (req, res) => {
+router.post("", (req, res) => {
   let newTutorial = req.body;
   tutorialModel
     .create(newTutorial)
@@ -35,7 +35,7 @@ router.put("", (req, res) => {
       throw err;
     });
 });
-router.post("", (req, res) => {
+router.put("", (req, res) => {
   let tutorial = req.body;
   tutorialModel
     .update(tutorial)
