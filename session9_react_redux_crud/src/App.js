@@ -1,11 +1,10 @@
-import logo from "./logo.svg";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Component } from "react";
 import { Link, Switch, Route } from "react-router-dom";
-import { BrowerRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
-import AddTutorial from "./components/add-tutorial.component";
+// import AddTutorial from "./components/add-tutorial.component";
 import Tutorial from "./components/tutorial.component";
 import TutorialsList from "./components/tutorial-list.component";
 
@@ -32,11 +31,9 @@ class App extends Component {
         </nav>
 
         <div className="container mt-3">
-          <Switch>
-            <Route exact path={["/", "/tutorials"]} component={TutorialsList} />
-            <Route exact path="/add" component={AddTutorial} />
-            <Route path="/tutorials/:id" component={Tutorial} />
-          </Switch>
+          <Route exact path={["/", "/tutorials"]} component={TutorialsList} />
+          {/* <Route exact path="/add" component={AddTutorial} /> */}
+          <Route path="/tutorials/:id" component={Tutorial} />
         </div>
       </Router>
     );
