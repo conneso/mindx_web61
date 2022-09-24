@@ -13,19 +13,28 @@ class TutorialModel {
   getAll() {
     return this.model.find({});
   }
+  getById(id) {
+    return this.model.findById(id);
+  }
   findByTitle(title) {
     return this.model.find({ title: { $regex: `.*${title}.*` } });
   }
   //U - Update
-  update(tutorial){
-    return this.model.updateOne(tutorial);
+  update(id, tutorial) {
+    return this.model.findByIdAndUpdate(id, {
+      $set: {
+        title: tutorial.title,
+        description: tutorial.description,
+        published: tutorial.published,
+      },
+    });
   }
   //Delete
-  delete(id){
+  delete(id) {
     return this.model.findByIdAndDelete(id);
   }
-  deleteAll(){
-    return this.model.deleteMany({})
+  deleteAll() {
+    return this.model.deleteMany({});
   }
 }
 

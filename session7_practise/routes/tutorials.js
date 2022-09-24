@@ -1,7 +1,6 @@
 var express = require("express");
 const TutorialModel = require("../DAL/models/tutorialModel");
 var router = express.Router();
-
 var tutorialModel = new TutorialModel();
 router.get("", (req, res) => {
   tutorialModel
@@ -13,12 +12,19 @@ router.get("", (req, res) => {
       throw err;
     });
 });
+router.get("/findById/:id", (req, res) => {
+  tutorialModel
+    .getById(req.params.id).then(data=> res.json(data))
+    .catch((err) => {
+      throw err;
+    });
+});
 router.get("/findByTitle", (req, res) => {
   let title = req.query.title;
   tutorialModel
     .findByTitle(title)
     .then((data) => {
-      res.json({ count: data.length, toturials: data });
+      res.json({ count: data.length, tutorials: data });
     })
     .catch((err) => {
       throw err;
@@ -35,12 +41,13 @@ router.post("", (req, res) => {
       throw err;
     });
 });
-router.put("", (req, res) => {
+router.put("/:id", (req, res) => {
+  let id = req.params.id;
   let tutorial = req.body;
   tutorialModel
-    .update(tutorial)
+    .update(id,tutorial)
     .then((data) => {
-      res.json(data);
+      res.json(tutorial);
     })
     .catch((err) => {
       throw err;
