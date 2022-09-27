@@ -1,8 +1,10 @@
 var express = require("express");
 const TutorialModel = require("../DAL/models/tutorialModel");
 var router = express.Router();
+const authenticateToken = require("../common/authentication");
+
 var tutorialModel = new TutorialModel();
-router.get("", (req, res) => {
+router.get("", authenticateToken, (req, res) => {
   tutorialModel
     .getAll()
     .then((data) => {
@@ -19,7 +21,7 @@ router.get("/findById/:id", (req, res) => {
       throw err;
     });
 });
-router.get("/findByTitle", (req, res) => {
+router.get("/findByTitle", authenticateToken, (req, res) => {
   let title = req.query.title;
   tutorialModel
     .findByTitle(title)

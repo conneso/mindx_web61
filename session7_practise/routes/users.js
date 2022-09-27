@@ -23,7 +23,7 @@ router.post("/login", (req, res) => {
       let token = model.generateAccessToken(uname); // "day la jwt token"; //cai nay se cai dat sau
       res.json({ existed: true, token: token });
     } else {
-      res.json({ existed: false, token: "" });
+      res.status(500).send({ message: 'Login failed!'});
     }
   });
 });

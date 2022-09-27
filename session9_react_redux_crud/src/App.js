@@ -1,14 +1,29 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Component } from "react";
-import { Link, Switch, Route } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 
-// import AddTutorial from "./components/add-tutorial.component";
+import { connect } from "react-redux";
+
+import AddTutorial from "./components/add-tutorial.component";
 import Tutorial from "./components/tutorial.component";
 import TutorialsList from "./components/tutorial-list.component";
 
+import Login from "./components/login.component";
+import { logout } from "./actions/users";
+
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.logOut = this.logOut.bind(this);
+    this.state = {
+      currentUser: undefined,
+    };
+  }
+  logOut() {
+    this.props.dispatch(logout());
+  }
   render() {
     return (
       <Router>
@@ -27,17 +42,30 @@ class App extends Component {
                 Add
               </Link>
             </li>
+            <li className="nav-item">
+              <Link to={"/login"} className="nav-link" onClick={this.logOut}>
+                Logout
+              </Link>
+            </li>
           </div>
         </nav>
 
         <div className="container mt-3">
           <Route exact path={["/", "/tutorials"]} component={TutorialsList} />
-          {/* <Route exact path="/add" component={AddTutorial} /> */}
+          <Route exact path="/add" component={AddTutorial} />
           <Route path="/tutorials/:id" component={Tutorial} />
+          <Route exact path="/login" component={Login} />
         </div>
       </Router>
     );
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  const { users } = state.users;
+  return {
+    users,
+  };
+}
+
+export default connect(mapStateToProps)(App);

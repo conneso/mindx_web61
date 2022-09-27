@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import {
   retrieveTutorials,
   findTutorialsByTitle,
-//   deleteAllTutorials,
+  //   deleteAllTutorials,
 } from "../actions/tutorials";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 class TutorialsList extends Component {
   constructor(props) {
     super(props);
@@ -23,7 +23,7 @@ class TutorialsList extends Component {
   }
 
   componentDidMount() {
-    console.log("list did mount")
+    console.log("list did mount");
     this.props.retrieveTutorials();
   }
 
@@ -70,7 +70,8 @@ class TutorialsList extends Component {
   render() {
     const { searchTitle, currentTutorial, currentIndex } = this.state;
     const { tutorials } = this.props;
-
+    const { users } = this.props;
+    if (!users.isLoggedIn) return <Redirect to="/login" />;
     return (
       <div className="list row">
         <div className="col-md-8">
@@ -164,11 +165,12 @@ class TutorialsList extends Component {
 const mapStateToProps = (state) => {
   return {
     tutorials: state.tutorials,
+    users: state.users,
   };
 };
 
 export default connect(mapStateToProps, {
   retrieveTutorials,
   findTutorialsByTitle,
-//   deleteAllTutorials,
+  //   deleteAllTutorials,
 })(TutorialsList);
